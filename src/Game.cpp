@@ -89,4 +89,21 @@ void Game::keyPressed(sf::Event event)
 
 }
 
+void Game::newAnimal()
+{
+	passport_accepted = false;
+	passport_rejected = false;
 
+	int rand_animal = rand() % 2;
+	int rand_passport = rand() % 2;
+
+	if (rand_animal == rand_passport)
+	{
+		should_accept = true;
+	}
+	else
+	{
+		should_accept = false;
+	}
+
+}

@@ -14,6 +14,7 @@ class Game
   void render();
   void mouseClicked(sf::Event event);
   void keyPressed(sf::Event event);
+  void newAnimal();
 
  private:
   sf::RenderWindow& window;
@@ -25,6 +26,10 @@ class Game
 
   sf::Texture* animals = new sf::Texture[3];
   sf::Texture* passports = new sf::Texture[3];
+
+  bool passport_accepted;
+  bool passport_rejected;
+  bool should_accept;
 
 };
 
