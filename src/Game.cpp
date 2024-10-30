@@ -26,43 +26,39 @@ bool Game::init()
 		std::cout << "Error loading file: " << "Data/Images/Critter Crossing Customs/elephant.png" << "\n";
 		return false;
 	}
-	character->setTexture(animals[0]);
 
 	if (!animals[1].loadFromFile("../Data/Images/Critter Crossing Customs/penguin.png"))
 	{
 		std::cout << "Error loading file: " << "Data/Images/Critter Crossing Customs/penguin.png" << "\n";
 		return false;
 	}
-	character->setTexture(animals[1]);
 	
 	if (!animals[2].loadFromFile("../Data/Images/Critter Crossing Customs/moose.png"))
 	{
 		std::cout << "Error loading file: " << "Data/Images/Critter Crossing Customs/moose.png" << "\n";
 		return false;
 	}
-	character->setTexture(animals[2]);
 
 	if (!passports[0].loadFromFile("../Data/Images/Critter Crossing Customs/elephant passport.png"))
 	{
 		std::cout << "Error loading file: " << "Data/Images/Critter Crossing Customs/elephant passport.png" << "\n";
 		return false;
 	}
-	passport->setTexture(animals[0]);
 
 	if (!passports[1].loadFromFile("../Data/Images/Critter Crossing Customs/penguin passport.png"))
 	{
 		std::cout << "Error loading file: " << "Data/Images/Critter Crossing Customs/penguin passport.png" << "\n";
 		return false;
 	}
-	passport->setTexture(animals[1]);
 
 	if (!passports[2].loadFromFile("../Data/Images/Critter Crossing Customs/moose passport.png"))
 	{
 		std::cout << "Error loading file: " << "Data/Images/Critter Crossing Customs/moose passport.png" << "\n";
 		return false;
 	}
-	passport->setTexture(animals[2]);
 	
+	newAnimal();
+
 	return true;
 }
 
@@ -74,6 +70,8 @@ void Game::update(float dt)
 void Game::render()
 {
 
+	window.draw(*passport);
+	window.draw(*character);
 }
 
 void Game::mouseClicked(sf::Event event)
@@ -105,5 +103,13 @@ void Game::newAnimal()
 	{
 		should_accept = false;
 	}
+
+	character->setTexture(animals[rand_animal], true);
+	character->setScale(1.8, 1.8);
+	character->setPosition(window.getSize().x / 12, window.getSize().y / 12);
+
+	passport->setTexture(passports[rand_passport]);
+	passport->setScale(0.6, 0.6);
+	passport->setPosition(window.getSize().x / 2, window.getSize().y / 3);
 
 }
