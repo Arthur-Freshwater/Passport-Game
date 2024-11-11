@@ -64,7 +64,8 @@ bool Game::init()
 
 void Game::update(float dt)
 {
-
+	dragSprite(character);
+	dragSprite(passport);
 }
 
 void Game::render()
@@ -74,11 +75,13 @@ void Game::render()
 	window.draw(*character);
 }
 
-void Game::mouseClicked(sf::Event event)
+void Game::mouseClicked(sf::Event event, sf::Sprite* sprite)
 {
 	//get the click position
 	sf::Vector2i click = sf::Mouse::getPosition(window);
+	sf::Vector2f clickf = static_cast<sf::Vector2f>(click);
 
+	drag_offset = clickf  sprite->getPosition();
 
 }
 
@@ -112,4 +115,17 @@ void Game::newAnimal()
 	passport->setScale(0.6, 0.6);
 	passport->setPosition(window.getSize().x / 2, window.getSize().y / 3);
 
+}
+
+void Game::dragSprite(sf::Sprite* sprite)
+{
+	if (sprite != nullptr)
+	{
+		sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
+		sf::Vector2f mouse_positionf = static_cast<sf::Vector2f>(mouse_position);
+
+
+		sf::Vector2f drag_position = mouse_positionf - drag_offset;
+		sprite->setPosition(drag_position.x, drag_position.y);
+	}
 }

@@ -12,9 +12,12 @@ class Game
   bool init();
   void update(float dt);
   void render();
-  void mouseClicked(sf::Event event);
+  void mouseClicked(sf::Event event, sf::Sprite* sprite);
   void keyPressed(sf::Event event);
   void newAnimal();
+  void dragSprite(sf::Sprite* sprite);
+  void mouseButtonPressed(sf::Event event);
+  void mouseButtonReleased(sf::Event event);
 
  private:
   sf::RenderWindow& window;
@@ -23,6 +26,9 @@ class Game
 
   sf::Sprite* character;
   sf::Sprite* passport;
+  std::unique_ptr<float> dragged;
+
+  sf::Vector2f drag_offset;
 
   sf::Texture* animals = new sf::Texture[3];
   sf::Texture* passports = new sf::Texture[3];
@@ -30,6 +36,8 @@ class Game
   bool passport_accepted;
   bool passport_rejected;
   bool should_accept;
+
+
 
 };
 
